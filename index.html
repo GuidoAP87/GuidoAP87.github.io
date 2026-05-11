@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guido Perez · Full-Stack Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="progress"></div>
+
+<nav>
+  <a href="#" class="nav-logo">Guido<span>.dev</span></a>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="#about" data-en="About" data-es="Sobre Mí">About</a></li>
+      <li><a href="#experience" data-en="Experience" data-es="Experiencia">Experience</a></li>
+      <li><a href="#projects" data-en="Projects" data-es="Proyectos">Projects</a></li>
+      <li><a href="#contact" data-en="Contact" data-es="Contacto">Contact</a></li>
+    </ul>
+    <div class="lang-toggle">
+      <button class="lang-btn active" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('es')">ES</button>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-badge" data-en="✦ Available for new projects" data-es="✦ Disponible para nuevos proyectos">✦ Available for new projects</div>
+      <h1 class="hero-name">
+        Guido <span class="line2">Perez</span>
+      </h1>
+      <div class="hero-title" data-en="Full-Stack & AI Developer" data-es="Desarrollador Full-Stack & IA">Full-Stack & AI Developer</div>
+      <p class="hero-desc" data-en="Systems Engineering student at UNC, building web platforms, mobile apps and AI-powered computer vision solutions for real-world problems." data-es="Estudiante de Ingeniería en Sistemas en la UNC. Desarrollo plataformas web, apps móviles y soluciones de visión computacional con IA para problemas reales.">
+        Systems Engineering student at UNC, building web platforms, mobile apps and AI-powered computer vision solutions for real-world problems.
+      </p>
+      <div class="hero-ctas">
+        <a href="#projects" class="btn-primary" data-en="View Projects" data-es="Ver Proyectos">View Projects</a>
+        <a href="https://github.com/GuidoAP87" target="_blank" class="btn-ghost"><i class="fab fa-github"></i> <span data-en="GitHub Profile" data-es="Perfil de GitHub">GitHub Profile</span></a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-num">7<span>+</span></div>
+          <div class="stat-label" data-en="Projects" data-es="Proyectos">Projects</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">5<span>+</span></div>
+          <div class="stat-label" data-en="Languages" data-es="Lenguajes">Languages</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">1<span>+</span></div>
+          <div class="stat-label" data-en="Years Exp." data-es="Años Exp.">Years Exp.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-photo-wrap">
+      <img src="foto-perfil.jpg" alt="Guido Perez" class="hero-photo">
+      <div class="float-badge b1">
+        <i class="fab fa-python"></i>
+        <span>Python · YOLOv8</span>
+      </div>
+      <div class="float-badge b2">
+        <i class="fas fa-code"></i>
+        <span>Full-Stack</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="section-inner">
+    <span class="section-tag reveal" data-en="About me" data-es="Sobre mí">About me</span>
+    <h2 class="section-title reveal" data-en="Turning complex problems<br>into clean solutions." data-es="Transformando problemas<br>complejos en soluciones claras.">Turning complex problems<br>into clean solutions.</h2>
+
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p data-en="I'm a Full-Stack Developer and Systems Engineering student at Universidad Nacional de Córdoba (UNC). I specialize in building robust web applications, mobile solutions, and AI-driven systems that solve real problems." data-es="Soy Desarrollador Full-Stack y estudiante de Ingeniería en Sistemas en la Universidad Nacional de Córdoba (UNC). Me especializo en construir aplicaciones web robustas, soluciones móviles y sistemas impulsados por IA.">
+          I'm a Full-Stack Developer and Systems Engineering student at Universidad Nacional de Córdoba (UNC). I specialize in building robust web applications, mobile solutions, and AI-driven systems that solve real problems.
+        </p>
+        <p data-en="My passion is combining modern web development with innovative technologies like computer vision. I enjoy every layer of the stack — from pixel-perfect UIs to complex database architecture and machine learning pipelines." data-es="Mi pasión es combinar el desarrollo web moderno con tecnologías innovadoras como la visión computacional. Disfruto cada capa del stack, desde interfaces pixel-perfect hasta arquitecturas de bases de datos complejas y pipelines de machine learning.">
+          My passion is combining modern web development with innovative technologies like computer vision. I enjoy every layer of the stack — from pixel-perfect UIs to complex database architecture and machine learning pipelines.
+        </p>
+        <a href="https://www.linkedin.com/in/guido-actis-perez/" target="_blank" class="btn-ghost" style="width:fit-content; margin-top:10px;">
+          <i class="fab fa-linkedin"></i>
+          <span data-en="Connect on LinkedIn" data-es="Conectar en LinkedIn">Connect on LinkedIn</span>
+        </a>
+      </div>
+
+      <div class="skills-grid reveal">
+        <div class="skill-card">
+          <div class="skill-card-title" data-en="Frontend" data-es="Frontend">Frontend</div>
+          <div class="skill-tags">
+            <span class="skill-tag">HTML5</span>
+            <span class="skill-tag">CSS3</span>
+            <span class="skill-tag">JavaScript</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-card-title" data-en="Backend" data-es="Backend">Backend</div>
+          <div class="skill-tags">
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">PHP</span>
+            <span class="skill-tag">Java</span>
+            <span class="skill-tag">C++</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-card-title" data-en="Databases" data-es="Bases de Datos">Databases</div>
+          <div class="skill-tags">
+            <span class="skill-tag">MySQL</span>
+            <span class="skill-tag">SQL</span>
+            <span class="skill-tag">PostgreSQL</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-card-title" data-en="AI & Tools" data-es="IA & Herramientas">AI & Tools</div>
+          <div class="skill-tags">
+            <span class="skill-tag">YOLOv8</span>
+            <span class="skill-tag">WordPress</span>
+            <span class="skill-tag">Git</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="section-inner">
+    <span class="section-tag reveal" data-en="Experience" data-es="Experiencia">Experience</span>
+    <h2 class="section-title reveal" data-en="Where I've worked." data-es="Dónde he trabajado.">Where I've worked.</h2>
+
+    <div class="exp-card reveal">
+      <div>
+        <div class="exp-role" data-en="Software Developer — Projects Division" data-es="Programador — Área de Proyectos">Software Developer — Projects Division</div>
+        <div class="exp-company">Universidad Nacional de Córdoba (UNC)</div>
+        <div class="exp-desc" data-en="Development and maintenance of scalable software solutions for operational management and strategic projects at one of Argentina's most prestigious universities. Full involvement from architecture design to deployment." data-es="Desarrollo y mantenimiento de soluciones de software escalables para la gestión operativa y proyectos estratégicos de una de las universidades más prestigiosas de Argentina. Participación completa desde el diseño de arquitectura hasta el despliegue.">
+          Development and maintenance of scalable software solutions for operational management and strategic projects at one of Argentina's most prestigious universities. Full involvement from architecture design to deployment.
+        </div>
+      </div>
+      <div class="exp-period" data-en="2026 – Present" data-es="2026 – Presente">2026 – Present</div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="section-inner">
+    <span class="section-tag reveal" data-en="Selected work" data-es="Trabajos seleccionados">Selected work</span>
+    <h2 class="section-title reveal" data-en="Projects I'm proud of." data-es="Proyectos de los que estoy orgulloso.">Projects I'm proud of.</h2>
+
+    <div class="projects-grid">
+
+      <div class="project-card reveal">
+        <div class="project-thumb">
+          <div class="bg-gradient" style="background: linear-gradient(135deg, #0a2a1a, #0d3b20);"></div>
+          <span class="emoji">🌱</span>
+        </div>
+        <div class="project-body">
+          <div class="project-title" data-en="Selective Spraying — AI Detection" data-es="Pulverización Selectiva — IA">Selective Spraying — AI Detection</div>
+          <div class="project-desc" data-en="Real-time computer vision system for weed detection in agricultural fields using Python and YOLOv8. Enables precise, selective herbicide application." data-es="Sistema de visión computacional en tiempo real para la detección de malezas en cultivos usando Python y YOLOv8. Permite la aplicación selectiva y precisa de herbicidas.">
+            Real-time computer vision system for weed detection in agricultural fields using Python and YOLOv8. Enables precise, selective herbicide application.
+          </div>
+          <div class="project-stack">
+            <span>Python</span><span>YOLOv8</span><span>Computer Vision</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/GuidoAP87" target="_blank"><i class="fab fa-github"></i> <span data-en="Code" data-es="Código">Code</span></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="project-thumb">
+          <div class="bg-gradient" style="background: linear-gradient(135deg, #1a0a2e, #2d1060);"></div>
+          <span class="emoji">🎸</span>
+        </div>
+        <div class="project-body">
+          <div class="project-title">Rockify</div>
+          <div class="project-desc" data-en="Landing page dedicated to Argentine Rock music with a functional interface inspired by Spotify. Features dynamic content and full database integration." data-es="Landing page dedicada al Rock Nacional Argentino con una interfaz funcional inspirada en Spotify. Contenido dinámico e integración completa con base de datos.">
+            Landing page dedicated to Argentine Rock music with a functional interface inspired by Spotify. Features dynamic content and full database integration.
+          </div>
+          <div class="project-stack">
+            <span>JavaScript</span><span>HTML/CSS</span><span>SQL</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/GuidoAP87/rockify-web" target="_blank"><i class="fab fa-github"></i> <span data-en="Code" data-es="Código">Code</span></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="project-thumb">
+          <div class="bg-gradient" style="background: linear-gradient(135deg, #0f1f2e, #1a3a5c);"></div>
+          <span class="emoji">🏢</span>
+        </div>
+        <div class="project-body">
+          <div class="project-title">Urban — 360° Showroom</div>
+          <div class="project-desc" data-en="Immersive 360-degree interactive showroom for the Urban real estate development in San Luis, Argentina. Built for high-end property visualization." data-es="Showroom interactivo en 360 grados para el desarrollo inmobiliario Urban en San Luis. Construido para la visualización inmersiva de propiedades de alto nivel.">
+            Immersive 360-degree interactive showroom for the Urban real estate development in San Luis, Argentina. Built for high-end property visualization.
+          </div>
+          <div class="project-stack">
+            <span>Pano2VR</span><span>Web Tech</span><span>UI/UX</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/GuidoAP87/urban-inversiones" target="_blank"><i class="fab fa-github"></i> <span data-en="Code" data-es="Código">Code</span></a>
+            <a href="https://www.urbansanluis.com/" target="_blank"><i class="fas fa-external-link-alt"></i> <span data-en="Live Demo" data-es="Ver Demo">Live Demo</span></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="project-thumb">
+          <div class="bg-gradient" style="background: linear-gradient(135deg, #2a1500, #4a2800);"></div>
+          <span class="emoji">🏪</span>
+        </div>
+        <div class="project-body">
+          <div class="project-title">Dulce Almacén</div>
+          <div class="project-desc" data-en="E-commerce and web presence for a local business. Optimized for GitHub Pages with clean product browsing experience and mobile-first design." data-es="E-commerce y presencia web para el emprendimiento Dulce Almacén. Optimizado para GitHub Pages con experiencia de navegación limpia y diseño mobile-first.">
+            E-commerce and web presence for a local business. Optimized for GitHub Pages with clean product browsing experience and mobile-first design.
+          </div>
+          <div class="project-stack">
+            <span>HTML</span><span>CSS</span><span>E-commerce</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/dulcealmacen/dulcealmacen.github.io" target="_blank"><i class="fab fa-github"></i> <span data-en="Code" data-es="Código">Code</span></a>
+            <a href="https://dulcealmacen.github.io" target="_blank"><i class="fas fa-external-link-alt"></i> <span data-en="Live Demo" data-es="Ver Demo">Live Demo</span></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="project-thumb">
+          <div class="bg-gradient" style="background: linear-gradient(135deg, #001a2a, #003d5c);"></div>
+          <span class="emoji">📸</span>
+        </div>
+        <div class="project-body">
+          <div class="project-title" data-en="Sports Photography Portfolio" data-es="Portafolio Deportivo">Sports Photography Portfolio</div>
+          <div class="project-desc" data-en="Professional website designed for high-impact sports photography showcase. Clean grid layout with smooth browsing optimized for visual storytelling." data-es="Sitio web profesional para exhibición de fotografía deportiva de alto impacto. Layout en grilla limpia con navegación suave, optimizado para storytelling visual.">
+            Professional website designed for high-impact sports photography showcase. Clean grid layout with smooth browsing optimized for visual storytelling.
+          </div>
+          <div class="project-stack">
+            <span>HTML</span><span>CSS</span><span>UI Design</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/GuidoAP87/PortafolioDeportivo" target="_blank"><i class="fab fa-github"></i> <span data-en="Code" data-es="Código">Code</span></a>
+            <a href="https://portafoliodeportivo.onrender.com/" target="_blank"><i class="fas fa-external-link-alt"></i> <span data-en="Live Demo" data-es="Ver Demo">Live Demo</span></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="project-thumb">
+          <div class="bg-gradient" style="background: linear-gradient(135deg, #001f3a, #003366);"></div>
+          <span class="emoji">🌐</span>
+        </div>
+        <div class="project-body">
+          <div class="project-title">Qenty Platform</div>
+          <div class="project-desc" data-en="UI layout and frontend development for the Qenty platform, focused on user experience, accessibility, and clean interaction design." data-es="Maquetado y desarrollo de interfaz para la plataforma Qenty, con foco en experiencia del usuario, accesibilidad y diseño de interacciones limpio.">
+            UI layout and frontend development for the Qenty platform, focused on user experience, accessibility, and clean interaction design.
+          </div>
+          <div class="project-stack">
+            <span>HTML</span><span>CSS</span><span>UX</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/GuidoAP87/Qenty-Platform" target="_blank"><i class="fab fa-github"></i> <span data-en="Code" data-es="Código">Code</span></a>
+            <a href="https://qenty-platform.onrender.com/" target="_blank"><i class="fas fa-external-link-alt"></i> <span data-en="Live Demo" data-es="Ver Demo">Live Demo</span></a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="section-inner">
+    <div class="contact-box reveal">
+      <span class="section-tag" data-en="Get in touch" data-es="Contáctame">Get in touch</span>
+      <h2 data-en="Let's build something<br>great together." data-es="Construyamos algo<br>genial juntos.">Let's build something<br>great together.</h2>
+      <p data-en="I'm based in Córdoba, Argentina and open to remote work worldwide. Whether it's a project, a job opportunity, or just a conversation — reach out." data-es="Estoy en Córdoba, Argentina y disponible para trabajo remoto en todo el mundo. Ya sea un proyecto, una oportunidad laboral o solo una charla, escribime.">
+        I'm based in Córdoba, Argentina and open to remote work worldwide. Whether it's a project, a job opportunity, or just a conversation — reach out.
+      </p>
+      <div class="contact-links">
+        <a href="mailto:tu-correo@ejemplo.com" class="btn-primary"><i class="fas fa-envelope"></i> <span data-en="Send Email" data-es="Enviar Email">Send Email</span></a>
+        <a href="https://www.linkedin.com/in/guido-actis-perez/" target="_blank" class="btn-ghost"><i class="fab fa-linkedin"></i> LinkedIn</a>
+        <a href="https://github.com/GuidoAP87" target="_blank" class="btn-ghost"><i class="fab fa-github"></i> GitHub</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <a href="#" class="footer-logo">Guido<span>.dev</span></a>
+  <p data-en="© 2026 Guido Perez · Córdoba, Argentina" data-es="© 2026 Guido Perez · Córdoba, Argentina">© 2026 Guido Perez · Córdoba, Argentina</p>
+  <div class="footer-socials">
+    <a href="https://www.linkedin.com/in/guido-actis-perez/" target="_blank"><i class="fab fa-linkedin"></i></a>
+    <a href="https://github.com/GuidoAP87" target="_blank"><i class="fab fa-github"></i></a>
+  </div>
+</footer>
+
+<script>
+// ─── SCROLL PROGRESS ───
+window.addEventListener('scroll', () => {
+  const d = document.documentElement;
+  const pct = (d.scrollTop / (d.scrollHeight - d.clientHeight)) * 100;
+  document.getElementById('progress').style.width = pct + '%';
+});
+
+// ─── REVEAL ON SCROLL ───
+const reveals = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 80);
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1 });
+reveals.forEach(el => io.observe(el));
+
+// ─── LANGUAGE TOGGLE ───
+let currentLang = 'en';
+
+function setLang(lang) {
+  currentLang = lang;
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector(`.lang-btn:${lang === 'en' ? 'first' : 'last'}-child`).classList.add('active');
+  document.querySelectorAll('[data-en]').forEach(el => {
+    const text = el.getAttribute(`data-${lang}`);
+    if (text) {
+      if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') el.placeholder = text;
+      else el.innerHTML = text;
+    }
+  });
+  document.documentElement.lang = lang;
+}
+
+// ─── NAV SHRINK ON SCROLL ───
+window.addEventListener('scroll', () => {
+  document.querySelector('nav').style.padding =
+    window.scrollY > 60 ? '12px 6%' : '18px 6%';
+});
+</script>
+</body>
+</html>
