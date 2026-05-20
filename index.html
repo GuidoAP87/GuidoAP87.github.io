@@ -3,276 +3,939 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Guido Perez · Full-Stack Developer</title>
+<title>Guido Actis Perez · Fullstack Developer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cabinet+Grotesk:wght@300;400;500;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<link rel="stylesheet" href="style.css">
+<style>
+:root {
+  --ink: #08090c;
+  --paper: #f2f0eb;
+  --paper2: #e8e5dc;
+  --accent: #e8500a;
+  --accent2: #1a1aff;
+  --muted: #7a7870;
+  --border: rgba(8,9,12,0.1);
+}
+
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Cabinet Grotesk', sans-serif;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* ── CUSTOM CURSOR ── */
+#cursor {
+  width: 12px; height: 12px;
+  background: var(--accent);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 99999;
+  transform: translate(-50%,-50%);
+  transition: transform 0.1s, width 0.2s, height 0.2s, background 0.2s;
+  mix-blend-mode: multiply;
+}
+#cursor-ring {
+  width: 40px; height: 40px;
+  border: 1.5px solid var(--accent);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 99998;
+  transform: translate(-50%,-50%);
+  transition: transform 0.15s ease, width 0.3s, height 0.3s;
+  mix-blend-mode: multiply;
+}
+body:hover #cursor { opacity:1; }
+
+/* ── PROGRESS BAR ── */
+#bar {
+  position:fixed; top:0; left:0; height:3px;
+  background: var(--accent);
+  z-index: 10000; width:0%;
+  transition: width 0.05s;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top:0; width:100%;
+  padding: 22px 5%;
+  display: flex; justify-content: space-between; align-items: center;
+  z-index: 1000;
+  mix-blend-mode: multiply;
+}
+.nav-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.6rem;
+  letter-spacing: 2px;
+  color: var(--ink);
+  text-decoration: none;
+}
+.nav-logo span { color: var(--accent); }
+.nav-links {
+  list-style: none;
+  display: flex; gap: 30px;
+}
+.nav-links a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--ink); }
+
+.lang-btn-wrap {
+  display:flex; gap:4px;
+  background: var(--ink);
+  border-radius: 20px;
+  padding: 4px;
+}
+.lb {
+  background: none; border:none;
+  color: rgba(255,255,255,0.4);
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 0.75rem; font-weight: 700;
+  padding: 5px 12px; border-radius: 14px;
+  cursor: none; transition: all 0.2s;
+  letter-spacing: 0.05em;
+}
+.lb.on { background: var(--accent); color:#fff; }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  padding: 120px 5% 80px;
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 60px;
+  align-items: end;
+  position: relative;
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.hero-bg-text {
+  position: absolute;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(120px, 18vw, 280px);
+  color: rgba(8,9,12,0.04);
+  line-height: 1;
+  bottom: -20px; right: -20px;
+  pointer-events: none;
+  user-select: none;
+  letter-spacing: -5px;
+  white-space: nowrap;
+}
+
+.hero-tag {
+  display: inline-flex;
+  align-items: center; gap: 10px;
+  font-size: 0.75rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.15em;
+  color: var(--accent);
+  margin-bottom: 28px;
+}
+.hero-tag::before {
+  content:''; width:30px; height:1.5px;
+  background: var(--accent);
+}
+
+.hero-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(4rem, 9vw, 9rem);
+  line-height: 0.92;
+  letter-spacing: -2px;
+  margin-bottom: 8px;
+}
+.hero-name .outline {
+  -webkit-text-stroke: 2px var(--ink);
+  color: transparent;
+}
+
+.hero-title {
+  font-size: clamp(1rem, 2vw, 1.3rem);
+  font-weight: 500;
+  color: var(--muted);
+  margin-bottom: 32px;
+  letter-spacing: 0.02em;
+}
+.hero-title strong { color: var(--ink); }
+
+.hero-desc {
+  font-size: 1.05rem;
+  font-weight: 300;
+  color: var(--muted);
+  max-width: 540px;
+  line-height: 1.8;
+  margin-bottom: 44px;
+}
+
+.hero-ctas {
+  display: flex; gap: 14px; flex-wrap: wrap;
+  margin-bottom: 60px;
+}
+
+.btn-solid {
+  display:inline-flex; align-items:center; gap:8px;
+  padding: 14px 28px;
+  background: var(--ink);
+  color: var(--paper);
+  text-decoration: none;
+  font-weight: 700; font-size: 0.85rem;
+  text-transform: uppercase; letter-spacing: 0.08em;
+  border-radius: 4px;
+  transition: background 0.2s, transform 0.2s;
+  cursor: none;
+}
+.btn-solid:hover { background: var(--accent); transform: translateY(-2px); }
+
+.btn-outline {
+  display:inline-flex; align-items:center; gap:8px;
+  padding: 14px 28px;
+  background: transparent;
+  color: var(--ink);
+  text-decoration: none;
+  font-weight: 700; font-size: 0.85rem;
+  text-transform: uppercase; letter-spacing: 0.08em;
+  border: 1.5px solid var(--ink);
+  border-radius: 4px;
+  transition: all 0.2s;
+  cursor: none;
+}
+.btn-outline:hover { background: var(--ink); color: var(--paper); }
+
+.hero-stats {
+  display: flex; gap: 40px;
+  padding-top: 40px;
+  border-top: 1px solid var(--border);
+}
+.stat-n {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.8rem;
+  line-height: 1;
+  color: var(--ink);
+  letter-spacing: -1px;
+}
+.stat-n em { color: var(--accent); font-style:normal; }
+.stat-l {
+  font-size: 0.72rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.12em;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+/* Hero Photo */
+.hero-photo-col {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding-bottom: 8px;
+}
+
+.photo-frame {
+  position: relative;
+  width: 340px;
+}
+.photo-frame::before {
+  content:'';
+  position: absolute;
+  inset: 12px -12px -12px 12px;
+  background: var(--accent);
+  border-radius: 4px;
+  z-index: 0;
+}
+.hero-photo {
+  width: 100%;
+  aspect-ratio: 3/4;
+  object-fit: cover;
+  object-position: top;
+  border-radius: 4px;
+  position: relative;
+  z-index: 1;
+  filter: grayscale(15%);
+  transition: filter 0.3s;
+}
+.hero-photo:hover { filter: grayscale(0%); }
+
+.avail-badge {
+  position: absolute;
+  top: -16px; left: -30px;
+  background: var(--ink);
+  color: var(--paper);
+  font-size: 0.72rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.1em;
+  padding: 10px 16px;
+  border-radius: 4px;
+  z-index: 2;
+  display: flex; align-items: center; gap: 8px;
+}
+.dot-g { width:7px;height:7px;background:#22c55e;border-radius:50%;animation:blink 1.5s ease infinite; }
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0.3;}}
+
+/* ── MARQUEE ── */
+.marquee-wrap {
+  background: var(--accent);
+  padding: 14px 0;
+  overflow: hidden;
+  border-top: 2px solid var(--ink);
+  border-bottom: 2px solid var(--ink);
+}
+.marquee-track {
+  display: flex; gap: 0;
+  animation: scroll-l 20s linear infinite;
+  width: max-content;
+}
+.marquee-track span {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.1rem;
+  letter-spacing: 0.1em;
+  color: var(--paper);
+  padding: 0 30px;
+  white-space: nowrap;
+}
+.marquee-track span.sep { color: rgba(255,255,255,0.4); }
+@keyframes scroll-l {
+  from{transform:translateX(0);}
+  to{transform:translateX(-50%);}
+}
+
+/* ── SECTIONS ── */
+section { padding: 100px 5%; }
+.s-inner { max-width: 1200px; margin: 0 auto; }
+
+.s-header {
+  display: flex;
+  align-items: baseline; gap: 20px;
+  margin-bottom: 64px;
+  padding-bottom: 20px;
+  border-bottom: 1.5px solid var(--ink);
+}
+.s-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1rem; color: var(--accent);
+  letter-spacing: 0.1em;
+}
+.s-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  letter-spacing: -1px;
+  line-height: 1;
+}
+
+/* ── ABOUT ── */
+#about { background: var(--paper2); border-bottom: 1px solid var(--border); }
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+.about-text p {
+  font-size: 1.05rem;
+  font-weight: 300;
+  color: var(--muted);
+  line-height: 1.9;
+  margin-bottom: 18px;
+}
+.about-text p strong { color: var(--ink); font-weight: 700; }
+
+.skills-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+.sk-group { }
+.sk-group-title {
+  font-size: 0.7rem; font-weight: 800;
+  text-transform: uppercase; letter-spacing: 0.15em;
+  color: var(--muted);
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+.sk-list {
+  list-style: none;
+  display: flex; flex-wrap: wrap; gap: 6px;
+}
+.sk-list li {
+  font-size: 0.82rem; font-weight: 500;
+  padding: 4px 10px;
+  border: 1.5px solid var(--border);
+  border-radius: 3px;
+  color: var(--ink);
+  transition: all 0.2s;
+  background: var(--paper);
+}
+.sk-list li:hover {
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+}
+
+/* ── EXPERIENCE ── */
+.exp-list { display: flex; flex-direction: column; gap: 0; }
+.exp-item {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 40px;
+  padding: 40px 0;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+.exp-item:first-child { border-top: 1px solid var(--border); }
+.exp-period {
+  font-size: 0.78rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.08em;
+  color: var(--muted);
+  padding-top: 4px;
+}
+.exp-current {
+  display: inline-block;
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.65rem; font-weight: 800;
+  text-transform: uppercase; letter-spacing: 0.1em;
+  padding: 3px 8px;
+  border-radius: 3px;
+  margin-top: 8px;
+}
+.exp-role {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.6rem;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+.exp-company {
+  font-size: 0.85rem; font-weight: 700;
+  color: var(--accent);
+  text-transform: uppercase; letter-spacing: 0.08em;
+  margin-bottom: 14px;
+}
+.exp-desc {
+  font-size: 0.95rem; font-weight: 300;
+  color: var(--muted);
+  line-height: 1.8;
+  margin-bottom: 16px;
+}
+.exp-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.exp-tags span {
+  font-size: 0.73rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.07em;
+  padding: 3px 10px;
+  background: var(--paper2);
+  border-radius: 3px;
+  color: var(--muted);
+}
+
+/* ── PROJECTS ── */
+#projects { background: var(--ink); color: var(--paper); }
+#projects .s-title { color: var(--paper); }
+#projects .s-num { color: var(--accent); }
+#projects .s-header { border-color: rgba(255,255,255,0.1); }
+
+.proj-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px,1fr));
+  gap: 2px;
+}
+
+.proj-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  padding: 36px;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.3s;
+  display: flex;
+  flex-direction: column;
+}
+.proj-card:hover { background: rgba(255,255,255,0.06); }
+.proj-card.featured {
+  grid-column: span 2;
+  background: var(--accent);
+  border-color: var(--accent);
+}
+.proj-card.featured:hover { background: #d4440a; }
+
+.proj-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  color: rgba(255,255,255,0.3);
+  margin-bottom: 20px;
+}
+.proj-card.featured .proj-num { color: rgba(255,255,255,0.6); }
+
+.proj-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.8rem;
+  letter-spacing: 0.5px;
+  color: var(--paper);
+  margin-bottom: 12px;
+  line-height: 1;
+}
+
+.proj-desc {
+  font-size: 0.9rem; font-weight: 300;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.75;
+  flex: 1;
+  margin-bottom: 24px;
+}
+.proj-card.featured .proj-desc { color: rgba(255,255,255,0.8); }
+
+.proj-stack { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:24px; }
+.proj-stack span {
+  font-size: 0.7rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.07em;
+  padding: 3px 9px;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 3px;
+  color: rgba(255,255,255,0.5);
+}
+.proj-card.featured .proj-stack span {
+  border-color: rgba(255,255,255,0.4);
+  color: rgba(255,255,255,0.9);
+}
+
+.proj-links {
+  display:flex; gap:18px;
+  padding-top:20px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+.proj-links a {
+  display:inline-flex; align-items:center; gap:6px;
+  color: rgba(255,255,255,0.45);
+  text-decoration:none;
+  font-size:0.8rem; font-weight:700;
+  text-transform:uppercase; letter-spacing:0.07em;
+  transition:color 0.2s;
+  cursor: none;
+}
+.proj-links a:hover { color: #fff; }
+.proj-card.featured .proj-links { border-color: rgba(255,255,255,0.3); }
+.proj-card.featured .proj-links a { color: rgba(255,255,255,0.7); }
+.proj-card.featured .proj-links a:hover { color:#fff; }
+
+/* ── CONTACT ── */
+#contact { background: var(--paper2); }
+
+.contact-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+.contact-left h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2.5rem, 5vw, 5rem);
+  letter-spacing: -1px;
+  line-height: 0.95;
+  margin-bottom: 24px;
+}
+.contact-left h2 em {
+  -webkit-text-stroke: 2px var(--ink);
+  color: transparent;
+  font-style: normal;
+}
+.contact-left p {
+  font-size: 1rem; font-weight: 300;
+  color: var(--muted); line-height: 1.8;
+  margin-bottom: 36px;
+}
+
+.contact-links-list { list-style: none; }
+.contact-links-list li {
+  padding: 18px 0;
+  border-bottom: 1px solid var(--border);
+}
+.contact-links-list li:first-child { border-top: 1px solid var(--border); }
+.contact-links-list a {
+  display: flex; justify-content: space-between; align-items: center;
+  text-decoration: none; color: var(--ink);
+  font-weight: 700; font-size: 0.9rem;
+  text-transform: uppercase; letter-spacing: 0.08em;
+  transition: color 0.2s;
+  cursor: none;
+}
+.contact-links-list a:hover { color: var(--accent); }
+.contact-links-list a i { font-size: 0.8rem; }
+
+.contact-info { padding-top: 20px; }
+.ci-item {
+  margin-bottom: 28px;
+}
+.ci-label {
+  font-size: 0.7rem; font-weight: 800;
+  text-transform: uppercase; letter-spacing: 0.15em;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+.ci-val {
+  font-size: 1rem; font-weight: 500;
+  color: var(--ink);
+}
+
+/* ── FOOTER ── */
+footer {
+  background: var(--ink);
+  padding: 28px 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.f-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.3rem;
+  letter-spacing: 2px;
+  color: var(--paper);
+  text-decoration: none;
+}
+.f-logo span { color: var(--accent); }
+footer p { color: rgba(255,255,255,0.3); font-size: 0.78rem; }
+.f-socials { display:flex; gap:18px; }
+.f-socials a {
+  color: rgba(255,255,255,0.35);
+  font-size: 1rem;
+  text-decoration: none;
+  transition: color 0.2s;
+  cursor: none;
+}
+.f-socials a:hover { color: var(--accent); }
+
+/* ── REVEAL ── */
+.reveal { opacity:0; transform:translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.reveal.in { opacity:1; transform:none; }
+
+/* ── RESPONSIVE ── */
+@media(max-width:960px){
+  .hero { grid-template-columns:1fr; }
+  .hero-photo-col { display:none; }
+  .about-grid { grid-template-columns:1fr; }
+  .contact-layout { grid-template-columns:1fr; }
+  .exp-item { grid-template-columns:1fr; gap:10px; }
+  .proj-card.featured { grid-column:span 1; }
+}
+@media(max-width:640px){
+  nav { padding:16px 4%; }
+  .nav-links { display:none; }
+  section { padding:70px 4%; }
+  .proj-grid { grid-template-columns:1fr; }
+  .skills-cols { grid-template-columns:1fr; }
+  .hero-stats { gap:24px; }
+}
+</style>
 </head>
 <body>
 
-<div id="progress"></div>
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+<div id="bar"></div>
 
+<!-- NAV -->
 <nav>
-  <a href="#" class="nav-logo">Guido<span>.dev</span></a>
-  <div class="nav-right">
-    <ul class="nav-links">
-      <li><a href="#about" data-en="About" data-es="Sobre Mí">About</a></li>
-      <li><a href="#experience" data-en="Experience" data-es="Experiencia">Experience</a></li>
-      <li><a href="#projects" data-en="Projects" data-es="Proyectos">Projects</a></li>
-      <li><a href="#contact" data-en="Contact" data-es="Contacto">Contact</a></li>
-    </ul>
-    <div class="lang-toggle">
-      <button class="lang-btn active" onclick="setLang('en')">EN</button>
-      <button class="lang-btn" onclick="setLang('es')">ES</button>
-    </div>
+  <a href="#" class="nav-logo">G<span>.</span>AP</a>
+  <ul class="nav-links">
+    <li><a href="#about" data-en="About" data-es="Sobre Mí">About</a></li>
+    <li><a href="#experience" data-en="Experience" data-es="Experiencia">Experience</a></li>
+    <li><a href="#projects" data-en="Projects" data-es="Proyectos">Projects</a></li>
+    <li><a href="#contact" data-en="Contact" data-es="Contacto">Contact</a></li>
+  </ul>
+  <div class="lang-btn-wrap">
+    <button class="lb on" onclick="setLang('en')">EN</button>
+    <button class="lb" onclick="setLang('es')">ES</button>
   </div>
 </nav>
 
+<!-- HERO -->
 <section class="hero">
-  <div class="hero-inner">
-    <div class="hero-text">
-      <div class="hero-badge" data-en="✦ Available for new projects" data-es="✦ Disponible para nuevos proyectos">✦ Available for new projects</div>
-      <h1 class="hero-name">
-        Guido <span class="line2">Perez</span>
-      </h1>
-      <div class="hero-title" data-en="Full-Stack & AI Developer" data-es="Desarrollador Full-Stack & IA">Full-Stack & AI Developer</div>
-      <p class="hero-desc" data-en="Systems Engineering student at UNC, building web platforms, mobile apps and AI-powered computer vision solutions for real-world problems." data-es="Estudiante de Ingeniería en Sistemas en la UNC. Desarrollo plataformas web, apps móviles y soluciones de visión computacional con IA para problemas reales.">
-        Systems Engineering student at UNC, building web platforms, mobile apps and AI-powered computer vision solutions for real-world problems.
-      </p>
-      <div class="hero-ctas">
-        <a href="#projects" class="btn-primary" data-en="View Projects" data-es="Ver Proyectos">View Projects</a>
-        <a href="https://github.com/GuidoAP87" target="_blank" class="btn-ghost"><i class="fab fa-github"></i> <span data-en="GitHub Profile" data-es="Perfil de GitHub">GitHub Profile</span></a>
-      </div>
-      <div class="hero-stats">
-        <div class="stat-item">
-          <div class="stat-num">7<span>+</span></div>
-          <div class="stat-label" data-en="Projects" data-es="Proyectos">Projects</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-num">5<span>+</span></div>
-          <div class="stat-label" data-en="Languages" data-es="Lenguajes">Languages</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-num">1<span>+</span></div>
-          <div class="stat-label" data-en="Years Exp." data-es="Años Exp.">Years Exp.</div>
-        </div>
-      </div>
+  <div>
+    <div class="hero-tag" data-en="Fullstack Developer · Córdoba, Argentina" data-es="Desarrollador Fullstack · Córdoba, Argentina">Fullstack Developer · Córdoba, Argentina</div>
+    <h1 class="hero-name">
+      Guido<br>
+      <span class="outline">Actis</span><br>
+      Perez
+    </h1>
+    <div class="hero-title" data-en="Building <strong>scalable systems</strong> that run in production." data-es="Construyendo <strong>sistemas escalables</strong> que corren en producción.">Building <strong>scalable systems</strong> that run in production.</div>
+    <p class="hero-desc" data-en="Fullstack developer with real enterprise experience at Claro Chile and UNC. I build complete products — from database architecture to responsive frontends — and deploy them on real servers." data-es="Desarrollador Fullstack con experiencia empresarial real en Claro Chile y la UNC. Construyo productos completos — desde la arquitectura de base de datos hasta frontends responsivos — y los despliega en servidores reales.">
+      Fullstack developer with real enterprise experience at Claro Chile and UNC. I build complete products — from database architecture to responsive frontends — and deploy them on real servers.
+    </p>
+    <div class="hero-ctas">
+      <a href="#projects" class="btn-solid" data-en="View My Work" data-es="Ver Mi Trabajo">View My Work</a>
+      <a href="https://github.com/GuidoAP87" target="_blank" class="btn-outline"><i class="fab fa-github"></i> GitHub</a>
     </div>
-
-    <div class="hero-photo-wrap">
-      <img src="foto-perfil.jpg" alt="Guido Perez" class="hero-photo">
-      <div class="float-badge b1">
-        <i class="fab fa-python"></i>
-        <span>Python · YOLOv8</span>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-n">3<em>+</em></div>
+        <div class="stat-l" data-en="Companies" data-es="Empresas">Companies</div>
       </div>
-      <div class="float-badge b2">
-        <i class="fas fa-code"></i>
-        <span>Full-Stack</span>
+      <div>
+        <div class="stat-n">500<em>+</em></div>
+        <div class="stat-l" data-en="Hours Training" data-es="Horas Formación">Hours Training</div>
+      </div>
+      <div>
+        <div class="stat-n">10<em>+</em></div>
+        <div class="stat-l" data-en="Technologies" data-es="Tecnologías">Technologies</div>
       </div>
     </div>
   </div>
+
+  <div class="hero-photo-col">
+    <div class="photo-frame">
+      <div class="avail-badge">
+        <span class="dot-g"></span>
+        <span data-en="Available" data-es="Disponible">Available</span>
+      </div>
+      <img src="foto-perfil.jpg" alt="Guido Actis Perez" class="hero-photo">
+    </div>
+  </div>
+
+  <div class="hero-bg-text">DEV</div>
 </section>
 
-<section id="about">
-  <div class="section-inner">
-    <span class="section-tag reveal" data-en="About me" data-es="Sobre mí">About me</span>
-    <h2 class="section-title reveal" data-en="Turning complex problems<br>into clean solutions." data-es="Transformando problemas<br>complejos en soluciones claras.">Turning complex problems<br>into clean solutions.</h2>
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span>PHP 8</span><span class="sep">✦</span>
+    <span>React.js</span><span class="sep">✦</span>
+    <span>Node.js</span><span class="sep">✦</span>
+    <span>Python</span><span class="sep">✦</span>
+    <span>MySQL</span><span class="sep">✦</span>
+    <span>Django</span><span class="sep">✦</span>
+    <span>Vue.js</span><span class="sep">✦</span>
+    <span>Docker</span><span class="sep">✦</span>
+    <span>PostgreSQL</span><span class="sep">✦</span>
+    <span>REST APIs</span><span class="sep">✦</span>
+    <span>Linux</span><span class="sep">✦</span>
+    <span>MongoDB</span><span class="sep">✦</span>
+    <span>PHP 8</span><span class="sep">✦</span>
+    <span>React.js</span><span class="sep">✦</span>
+    <span>Node.js</span><span class="sep">✦</span>
+    <span>Python</span><span class="sep">✦</span>
+    <span>MySQL</span><span class="sep">✦</span>
+    <span>Django</span><span class="sep">✦</span>
+    <span>Vue.js</span><span class="sep">✦</span>
+    <span>Docker</span><span class="sep">✦</span>
+    <span>PostgreSQL</span><span class="sep">✦</span>
+    <span>REST APIs</span><span class="sep">✦</span>
+    <span>Linux</span><span class="sep">✦</span>
+    <span>MongoDB</span><span class="sep">✦</span>
+  </div>
+</div>
 
+<!-- ABOUT -->
+<section id="about">
+  <div class="s-inner">
+    <div class="s-header reveal">
+      <span class="s-num">01</span>
+      <h2 class="s-title" data-en="About" data-es="Sobre Mí">About</h2>
+    </div>
     <div class="about-grid">
       <div class="about-text reveal">
-        <p data-en="I'm a Full-Stack Developer and Systems Engineering student at Universidad Tecnológica Nacional (UTN). I specialize in building robust web applications, mobile solutions, and AI-driven systems that solve real problems." data-es="Soy Desarrollador Full-Stack y estudiante de Ingeniería en Sistemas en la Universidad Nacional de Córdoba (UNC). Me especializo en construir aplicaciones web robustas, soluciones móviles y sistemas impulsados por IA.">
-          I'm a Full-Stack Developer and Systems Engineering student at National Technological University (UTN). I specialize in building robust web applications, mobile solutions, and AI-driven systems that solve real problems.
+        <p data-en="I'm a Fullstack developer currently in my 4th/5th year of <strong>Systems Engineering at UTN</strong>. I've built real production systems — not just side projects — for an Argentine public university and a major telecom company." data-es="Soy desarrollador Fullstack cursando 4to/5to año de <strong>Ingeniería en Sistemas en UTN</strong>. He construido sistemas reales en producción — no solo proyectos personales — para una universidad pública argentina y una empresa de telecomunicaciones.">
+          I'm a Fullstack developer currently in my 4th/5th year of <strong>Systems Engineering at UTN</strong>. I've built real production systems — not just side projects — for an Argentine public university and a major telecom company.
         </p>
-        <p data-en="My passion is combining modern web development with innovative technologies like computer vision. I enjoy every layer of the stack — from pixel-perfect UIs to complex database architecture and machine learning pipelines." data-es="Mi pasión es combinar el desarrollo web moderno con tecnologías innovadoras como la visión computacional. Disfruto cada capa del stack, desde interfaces pixel-perfect hasta arquitecturas de bases de datos complejas y pipelines de machine learning.">
-          My passion is combining modern web development with innovative technologies like computer vision. I enjoy every layer of the stack — from pixel-perfect UIs to complex database architecture and machine learning pipelines.
+        <p data-en="My most ambitious project is <strong>CityHub</strong>, a multitenant SaaS platform for municipal management deployed on a Linux server at UNC. It handles health, social development, security, pharmacy, GIS maps, and PDF report generation for courts." data-es="Mi proyecto más ambicioso es <strong>CityHub</strong>, una plataforma SaaS multitenant para gestión municipal desplegada en un servidor Linux de la UNC. Maneja salud, desarrollo social, seguridad, farmacia, mapas GIS y generación de informes PDF para juzgados.">
+          My most ambitious project is <strong>CityHub</strong>, a multitenant SaaS platform for municipal management deployed on a Linux server at UNC. It handles health, social development, security, pharmacy, GIS maps, and PDF report generation for courts.
         </p>
-        <a href="https://www.linkedin.com/in/guido-actis-perez/" target="_blank" class="btn-ghost" style="width:fit-content; margin-top:10px;">
-          <i class="fab fa-linkedin"></i>
-          <span data-en="Connect on LinkedIn" data-es="Conectar en LinkedIn">Connect on LinkedIn</span>
-        </a>
+        <p data-en="I work across the full stack: database design, business logic, responsive interfaces, and Linux server deployment. English B2 — comfortable working with international clients." data-es="Trabajo en todo el stack: diseño de base de datos, lógica de negocio, interfaces responsivas y deploy en servidor Linux. Inglés B2 — cómodo trabajando con clientes internacionales.">
+          I work across the full stack: database design, business logic, responsive interfaces, and Linux server deployment. English B2 — comfortable working with international clients.
+        </p>
+        <div style="margin-top:32px;">
+          <a href="https://www.linkedin.com/in/guidoactis" target="_blank" class="btn-outline" style="width:fit-content;">
+            <i class="fab fa-linkedin"></i>
+            <span data-en="LinkedIn Profile" data-es="Perfil LinkedIn">LinkedIn Profile</span>
+          </a>
+        </div>
       </div>
-
-      <div class="skills-grid reveal">
-        <div class="skill-card">
-          <div class="skill-card-title" data-en="Frontend" data-es="Frontend">Frontend</div>
-          <div class="skill-tags">
-            <span class="skill-tag">HTML5</span>
-            <span class="skill-tag">CSS3</span>
-            <span class="skill-tag">JavaScript</span>
-          </div>
+      <div class="skills-cols reveal">
+        <div class="sk-group">
+          <div class="sk-group-title">Backend</div>
+          <ul class="sk-list">
+            <li>PHP 8</li><li>PDO</li><li>Python</li>
+            <li>Django</li><li>Node.js</li><li>Express</li>
+            <li>REST APIs</li><li>JWT</li>
+          </ul>
         </div>
-        <div class="skill-card">
-          <div class="skill-card-title" data-en="Backend" data-es="Backend">Backend</div>
-          <div class="skill-tags">
-            <span class="skill-tag">Python</span>
-            <span class="skill-tag">PHP</span>
-            <span class="skill-tag">Java</span>
-            <span class="skill-tag">C++</span>
-          </div>
+        <div class="sk-group">
+          <div class="sk-group-title">Frontend</div>
+          <ul class="sk-list">
+            <li>React.js</li><li>Vue.js</li><li>JavaScript ES6+</li>
+            <li>HTML5</li><li>CSS3</li><li>Tailwind</li><li>SASS</li>
+          </ul>
         </div>
-        <div class="skill-card">
-          <div class="skill-card-title" data-en="Databases" data-es="Bases de Datos">Databases</div>
-          <div class="skill-tags">
-            <span class="skill-tag">MySQL</span>
-            <span class="skill-tag">SQL</span>
-            <span class="skill-tag">PostgreSQL</span>
-          </div>
+        <div class="sk-group">
+          <div class="sk-group-title" data-en="Databases" data-es="Bases de Datos">Databases</div>
+          <ul class="sk-list">
+            <li>MySQL</li><li>PostgreSQL</li><li>MongoDB</li>
+            <li>Firebase</li><li>TypeORM</li><li>Sequelize</li>
+          </ul>
         </div>
-        <div class="skill-card">
-          <div class="skill-card-title" data-en="AI & Tools" data-es="IA & Herramientas">AI & Tools</div>
-          <div class="skill-tags">
-            <span class="skill-tag">YOLOv8</span>
-            <span class="skill-tag">WordPress</span>
-            <span class="skill-tag">Git</span>
-          </div>
+        <div class="sk-group">
+          <div class="sk-group-title" data-en="Infrastructure" data-es="Infraestructura">Infrastructure</div>
+          <ul class="sk-list">
+            <li>Linux</li><li>Git</li><li>Docker</li>
+            <li>XAMPP</li><li>FileZilla</li><li>Scrum</li>
+          </ul>
         </div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- EXPERIENCE -->
 <section id="experience">
-  <div class="section-inner">
-    <span class="section-tag reveal" data-en="Experience" data-es="Experiencia">Experience</span>
-    <h2 class="section-title reveal" data-en="Where I've worked." data-es="Dónde he trabajado.">Where I've worked.</h2>
+  <div class="s-inner">
+    <div class="s-header reveal">
+      <span class="s-num">02</span>
+      <h2 class="s-title" data-en="Experience" data-es="Experiencia">Experience</h2>
+    </div>
+    <div class="exp-list">
 
-    <div class="exp-card reveal">
-      <div>
-        <div class="exp-role" data-en="Software Developer — Projects Division" data-es="Programador — Área de Proyectos">Software Developer — Projects Division</div>
-        <div class="exp-company">Universidad Nacional de Córdoba (UNC)</div>
-        <div class="exp-desc" data-en="Development and maintenance of scalable software solutions for operational management and strategic projects at one of Argentina's most prestigious universities. Full involvement from architecture design to deployment." data-es="Desarrollo y mantenimiento de soluciones de software escalables para la gestión operativa y proyectos estratégicos de una de las universidades más prestigiosas de Argentina. Participación completa desde el diseño de arquitectura hasta el despliegue.">
-          Development and maintenance of scalable software solutions for operational management and strategic projects at one of Argentina's most prestigious universities. Full involvement from architecture design to deployment.
+      <div class="exp-item reveal">
+        <div>
+          <div class="exp-period">Mar 2026 – <span data-en="Present" data-es="Presente">Present</span></div>
+          <div class="exp-current" data-en="Current" data-es="Actual">Current</div>
+        </div>
+        <div>
+          <div class="exp-role" data-en="Software Developer" data-es="Desarrollador de Software">Software Developer</div>
+          <div class="exp-company">Universidad Nacional de Córdoba — UNC</div>
+          <div class="exp-desc" data-en="Built CityHub from scratch — a multitenant SaaS platform for municipal management. Modules include health, social development, public security, HR, pharmacy, court PDF reports, and GIS maps. Full ownership: database design, backend, frontend, and Linux server deployment." data-es="Construí CityHub desde cero — una plataforma SaaS multitenant para gestión municipal. Módulos de salud, desarrollo social, seguridad pública, RRHH, farmacia, informes PDF para juzgados y mapas GIS. Responsabilidad total: diseño de BD, backend, frontend y deploy en servidor Linux.">
+            Built CityHub from scratch — a multitenant SaaS platform for municipal management. Modules include health, social development, public security, HR, pharmacy, court PDF reports, and GIS maps. Full ownership: database design, backend, frontend, and Linux server deployment.
+          </div>
+          <div class="exp-tags">
+            <span>PHP 8</span><span>PDO</span><span>MySQL</span><span>JavaScript</span>
+            <span>FPDF</span><span>GIS</span><span>Linux</span><span>Multitenant</span>
+          </div>
         </div>
       </div>
-      <div class="exp-period" data-en="2026 – Present" data-es="2026 – Presente">2026 – Present</div>
+
+      <div class="exp-item reveal">
+        <div>
+          <div class="exp-period">Dec 2024 – Aug 2025</div>
+        </div>
+        <div>
+          <div class="exp-role" data-en="Data Analyst" data-es="Analista de Datos">Data Analyst</div>
+          <div class="exp-company">Universidad Siglo 21</div>
+          <div class="exp-desc" data-en="Developed software for institutional data analysis and visualization using Python. Generated automated reports and provided consulting on tech career orientation." data-es="Desarrollé software para análisis y visualización de datos institucionales con Python. Generé reportes automatizados y asesoré en orientación de carreras tecnológicas.">
+            Developed software for institutional data analysis and visualization using Python. Generated automated reports and provided consulting on tech career orientation.
+          </div>
+          <div class="exp-tags">
+            <span>Python</span><span>Data Analysis</span><span>Automation</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-item reveal">
+        <div>
+          <div class="exp-period">Apr 2023 – Nov 2023</div>
+        </div>
+        <div>
+          <div class="exp-role" data-en="Fullstack Developer" data-es="Desarrollador Fullstack">Fullstack Developer</div>
+          <div class="exp-company">Claro Chile</div>
+          <div class="exp-desc" data-en="Fullstack development of a corporate system for one of Latin America's largest telecom companies. Built REST APIs and integrated relational databases for production use." data-es="Desarrollo fullstack de un sistema corporativo para una de las empresas de telecomunicaciones más grandes de Latinoamérica. Construí APIs REST e integré bases de datos relacionales para uso en producción.">
+            Fullstack development of a corporate system for one of Latin America's largest telecom companies. Built REST APIs and integrated relational databases for production use.
+          </div>
+          <div class="exp-tags">
+            <span>Fullstack</span><span>REST APIs</span><span>Databases</span><span>Corporate</span>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
 
+<!-- PROJECTS -->
 <section id="projects">
-  <div class="section-inner">
-    <span class="section-tag reveal" data-en="Selected work" data-es="Trabajos seleccionados">Selected work</span>
-    <h2 class="section-title reveal" data-en="Projects I'm proud of." data-es="Proyectos de los que estoy orgulloso.">Projects I'm proud of.</h2>
+  <div class="s-inner">
+    <div class="s-header reveal">
+      <span class="s-num">03</span>
+      <h2 class="s-title" data-en="Projects" data-es="Proyectos">Projects</h2>
+    </div>
+    <div class="proj-grid">
 
-    <div class="projects-grid">
-
-      <div class="project-card reveal">
-        <div class="project-thumb">
-          <div class="bg-gradient" style="background: linear-gradient(135deg, #0a2a1a, #0d3b20);"></div>
-          <span class="emoji">🌱</span>
+      <div class="proj-card featured reveal">
+        <div class="proj-num">⭐ FEATURED PROJECT</div>
+        <div class="proj-title">CityHub — Municipal SaaS</div>
+        <div class="proj-desc" data-en="Production SaaS platform built from scratch for municipal management. Multitenant architecture: multiple municipalities operate independently on the same codebase. Modules: health, social development, public security, HR, pharmacy, court PDF reports, and GIS maps. Deployed on UNC Linux server." data-es="Plataforma SaaS en producción construida desde cero para gestión municipal. Arquitectura multitenant: múltiples municipios operan de forma independiente sobre la misma base de código. Módulos: salud, desarrollo social, seguridad pública, RRHH, farmacia, informes PDF para juzgados y mapas GIS. Desplegada en servidor Linux de la UNC.">
+          Production SaaS platform built from scratch for municipal management. Multitenant architecture: multiple municipalities operate independently on the same codebase. Modules: health, social development, public security, HR, pharmacy, court PDF reports, and GIS maps. Deployed on UNC Linux server.
         </div>
-        <div class="project-body">
-          <div class="project-title" data-en="Selective Spraying — AI Detection" data-es="Pulverización Selectiva — IA">Selective Spraying — AI Detection</div>
-          <div class="project-desc" data-en="Real-time computer vision system for weed detection in agricultural fields using Python and YOLOv8. Enables precise, selective herbicide application." data-es="Sistema de visión computacional en tiempo real para la detección de malezas en cultivos usando Python y YOLOv8. Permite la aplicación selectiva y precisa de herbicidas.">
-            Real-time computer vision system for weed detection in agricultural fields using Python and YOLOv8. Enables precise, selective herbicide application.
-          </div>
-          <div class="project-stack">
-            <span>Python</span><span>YOLOv8</span><span>Computer Vision</span>
-          </div>
-          <div class="project-links">
-            <a href="https://github.com/GuidoAP87" target="_blank"><i class="fab fa-github"></i> <span data-en="Code" data-es="Código">Code</span></a>
-          </div>
+        <div class="proj-stack">
+          <span>PHP 8</span><span>PDO</span><span>MySQL</span><span>JavaScript</span>
+          <span>HTML5/CSS3</span><span>FPDF</span><span>GIS/Maps</span><span>Linux</span><span>Git</span>
+        </div>
+        <div class="proj-links">
+          <a href="https://github.com/GuidoAP87" target="_blank"><i class="fab fa-github"></i> <span data-en="Code" data-es="Código">Code</span></a>
         </div>
       </div>
 
-      <div class="project-card reveal">
-        <div class="project-thumb">
-          <div class="bg-gradient" style="background: linear-gradient(135deg, #1a0a2e, #2d1060);"></div>
-          <span class="emoji">🎸</span>
-        </div>
-        <div class="project-body">
-          <div class="project-title">Rockify</div>
-          <div class="project-desc" data-en="Landing page dedicated to Argentine Rock music with a functional interface inspired by Spotify. Features dynamic content and full database integration." data-es="Landing page dedicada al Rock Nacional Argentino con una interfaz funcional inspirada en Spotify. Contenido dinámico e integración completa con base de datos.">
-            Landing page dedicated to Argentine Rock music with a functional interface inspired by Spotify. Features dynamic content and full database integration.
-          </div>
-          <div class="project-stack">
-            <span>JavaScript</span><span>HTML/CSS</span><span>SQL</span>
-          </div>
-          <div class="project-links">
-            <a href="https://github.com/GuidoAP87/rockify-web" target="_blank"><i class="fab fa-github"></i> <span data-en="Code" data-es="Código">Code</span></a>
-          </div>
+      <div class="proj-card reveal">
+        <div class="proj-num">01</div>
+        <div class="proj-title">Rockify</div>
+        <div class="proj-desc" data-en="Landing page for Argentine Rock music with a Spotify-inspired interface. Dynamic content and full database integration." data-es="Landing page para el Rock Nacional Argentino con interfaz inspirada en Spotify. Contenido dinámico e integración completa con base de datos.">Landing page for Argentine Rock music with a Spotify-inspired interface. Dynamic content and full database integration.</div>
+        <div class="proj-stack"><span>JavaScript</span><span>HTML/CSS</span><span>SQL</span></div>
+        <div class="proj-links">
+          <a href="https://github.com/GuidoAP87/rockify-web" target="_blank"><i class="fab fa-github"></i> <span data-en="Code" data-es="Código">Code</span></a>
         </div>
       </div>
 
-      <div class="project-card reveal">
-        <div class="project-thumb">
-          <div class="bg-gradient" style="background: linear-gradient(135deg, #0f1f2e, #1a3a5c);"></div>
-          <span class="emoji">🏢</span>
-        </div>
-        <div class="project-body">
-          <div class="project-title">Urban — 360° Showroom</div>
-          <div class="project-desc" data-en="Immersive 360-degree interactive showroom for the Urban real estate development in San Luis, Argentina. Built for high-end property visualization." data-es="Showroom interactivo en 360 grados para el desarrollo inmobiliario Urban en San Luis. Construido para la visualización inmersiva de propiedades de alto nivel.">
-            Immersive 360-degree interactive showroom for the Urban real estate development in San Luis, Argentina. Built for high-end property visualization.
-          </div>
-          <div class="project-stack">
-            <span>Pano2VR</span><span>Web Tech</span><span>UI/UX</span>
-          </div>
-          <div class="project-links">
-            <a href="https://github.com/GuidoAP87/urban-inversiones" target="_blank"><i class="fab fa-github"></i> <span data-en="Code" data-es="Código">Code</span></a>
-            <a href="https://www.urbansanluis.com/" target="_blank"><i class="fas fa-external-link-alt"></i> <span data-en="Live Demo" data-es="Ver Demo">Live Demo</span></a>
-          </div>
+      <div class="proj-card reveal">
+        <div class="proj-num">02</div>
+        <div class="proj-title">Urban 360°</div>
+        <div class="proj-desc" data-en="Immersive 360-degree showroom for the Urban real estate development in San Luis. Live on urbansanluis.com." data-es="Showroom inmersivo en 360 grados para el desarrollo inmobiliario Urban en San Luis. En vivo en urbansanluis.com.">Immersive 360-degree showroom for the Urban real estate development in San Luis. Live on urbansanluis.com.</div>
+        <div class="proj-stack"><span>Pano2VR</span><span>Web Tech</span><span>UI/UX</span></div>
+        <div class="proj-links">
+          <a href="https://github.com/GuidoAP87/urban-inversiones" target="_blank"><i class="fab fa-github"></i> <span data-en="Code" data-es="Código">Code</span></a>
+          <a href="https://www.urbansanluis.com/" target="_blank"><i class="fas fa-external-link-alt"></i> Live</a>
         </div>
       </div>
 
-      <div class="project-card reveal">
-        <div class="project-thumb">
-          <div class="bg-gradient" style="background: linear-gradient(135deg, #2a1500, #4a2800);"></div>
-          <span class="emoji">🏪</span>
-        </div>
-        <div class="project-body">
-          <div class="project-title">Dulce Almacén</div>
-          <div class="project-desc" data-en="E-commerce and web presence for a local business. Optimized for GitHub Pages with clean product browsing experience and mobile-first design." data-es="E-commerce y presencia web para el emprendimiento Dulce Almacén. Optimizado para GitHub Pages con experiencia de navegación limpia y diseño mobile-first.">
-            E-commerce and web presence for a local business. Optimized for GitHub Pages with clean product browsing experience and mobile-first design.
-          </div>
-          <div class="project-stack">
-            <span>HTML</span><span>CSS</span><span>E-commerce</span>
-          </div>
-          <div class="project-links">
-            <a href="https://github.com/dulcealmacen/dulcealmacen.github.io" target="_blank"><i class="fab fa-github"></i> <span data-en="Code" data-es="Código">Code</span></a>
-            <a href="https://dulcealmacen.github.io" target="_blank"><i class="fas fa-external-link-alt"></i> <span data-en="Live Demo" data-es="Ver Demo">Live Demo</span></a>
-          </div>
+      <div class="proj-card reveal">
+        <div class="proj-num">03</div>
+        <div class="proj-title">Dulce Almacén</div>
+        <div class="proj-desc" data-en="E-commerce and web presence for a local business. Mobile-first design deployed on GitHub Pages." data-es="E-commerce y presencia web para negocio local. Diseño mobile-first desplegado en GitHub Pages.">E-commerce and web presence for a local business. Mobile-first design deployed on GitHub Pages.</div>
+        <div class="proj-stack"><span>HTML</span><span>CSS</span><span>E-commerce</span></div>
+        <div class="proj-links">
+          <a href="https://github.com/dulcealmacen/dulcealmacen.github.io" target="_blank"><i class="fab fa-github"></i> <span data-en="Code" data-es="Código">Code</span></a>
+          <a href="https://dulcealmacen.github.io" target="_blank"><i class="fas fa-external-link-alt"></i> Live</a>
         </div>
       </div>
 
-      <div class="project-card reveal">
-        <div class="project-thumb">
-          <div class="bg-gradient" style="background: linear-gradient(135deg, #001a2a, #003d5c);"></div>
-          <span class="emoji">📸</span>
-        </div>
-        <div class="project-body">
-          <div class="project-title" data-en="Sports Photography Portfolio" data-es="Portafolio Deportivo">Sports Photography Portfolio</div>
-          <div class="project-desc" data-en="Professional website designed for high-impact sports photography showcase. Clean grid layout with smooth browsing optimized for visual storytelling." data-es="Sitio web profesional para exhibición de fotografía deportiva de alto impacto. Layout en grilla limpia con navegación suave, optimizado para storytelling visual.">
-            Professional website designed for high-impact sports photography showcase. Clean grid layout with smooth browsing optimized for visual storytelling.
-          </div>
-          <div class="project-stack">
-            <span>HTML</span><span>CSS</span><span>UI Design</span>
-          </div>
-          <div class="project-links">
-            <a href="https://github.com/GuidoAP87/PortafolioDeportivo" target="_blank"><i class="fab fa-github"></i> <span data-en="Code" data-es="Código">Code</span></a>
-            <a href="https://portafoliodeportivo.onrender.com/" target="_blank"><i class="fas fa-external-link-alt"></i> <span data-en="Live Demo" data-es="Ver Demo">Live Demo</span></a>
-          </div>
+      <div class="proj-card reveal">
+        <div class="proj-num">04</div>
+        <div class="proj-title">Qenty Platform</div>
+        <div class="proj-desc" data-en="UI layout and frontend development focused on UX, accessibility, and clean interaction design." data-es="Maquetado y desarrollo frontend con foco en UX, accesibilidad y diseño de interacciones limpio.">UI layout and frontend development focused on UX, accessibility, and clean interaction design.</div>
+        <div class="proj-stack"><span>HTML</span><span>CSS</span><span>UX</span></div>
+        <div class="proj-links">
+          <a href="https://github.com/GuidoAP87/Qenty-Platform" target="_blank"><i class="fab fa-github"></i> <span data-en="Code" data-es="Código">Code</span></a>
+          <a href="https://qenty-platform.onrender.com/" target="_blank"><i class="fas fa-external-link-alt"></i> Live</a>
         </div>
       </div>
 
-      <div class="project-card reveal">
-        <div class="project-thumb">
-          <div class="bg-gradient" style="background: linear-gradient(135deg, #001f3a, #003366);"></div>
-          <span class="emoji">🌐</span>
-        </div>
-        <div class="project-body">
-          <div class="project-title">Qenty Platform</div>
-          <div class="project-desc" data-en="UI layout and frontend development for the Qenty platform, focused on user experience, accessibility, and clean interaction design." data-es="Maquetado y desarrollo de interfaz para la plataforma Qenty, con foco en experiencia del usuario, accesibilidad y diseño de interacciones limpio.">
-            UI layout and frontend development for the Qenty platform, focused on user experience, accessibility, and clean interaction design.
-          </div>
-          <div class="project-stack">
-            <span>HTML</span><span>CSS</span><span>UX</span>
-          </div>
-          <div class="project-links">
-            <a href="https://github.com/GuidoAP87/Qenty-Platform" target="_blank"><i class="fab fa-github"></i> <span data-en="Code" data-es="Código">Code</span></a>
-            <a href="https://qenty-platform.onrender.com/" target="_blank"><i class="fas fa-external-link-alt"></i> <span data-en="Live Demo" data-es="Ver Demo">Live Demo</span></a>
-          </div>
+      <div class="proj-card reveal">
+        <div class="proj-num">05</div>
+        <div class="proj-title" data-en="Sports Portfolio" data-es="Portafolio Deportivo">Sports Portfolio</div>
+        <div class="proj-desc" data-en="Professional website for sports photography showcase with clean grid layout and visual storytelling." data-es="Sitio web profesional para fotografía deportiva con layout en grilla limpia y storytelling visual.">Professional website for sports photography showcase with clean grid layout and visual storytelling.</div>
+        <div class="proj-stack"><span>HTML</span><span>CSS</span><span>UI Design</span></div>
+        <div class="proj-links">
+          <a href="https://github.com/GuidoAP87/PortafolioDeportivo" target="_blank"><i class="fab fa-github"></i> <span data-en="Code" data-es="Código">Code</span></a>
+          <a href="https://portafoliodeportivo.onrender.com/" target="_blank"><i class="fas fa-external-link-alt"></i> Live</a>
         </div>
       </div>
 
@@ -280,74 +943,127 @@
   </div>
 </section>
 
+<!-- CONTACT -->
 <section id="contact">
-  <div class="section-inner">
-    <div class="contact-box reveal">
-      <span class="section-tag" data-en="Get in touch" data-es="Contáctame">Get in touch</span>
-      <h2 data-en="Let's build something<br>great together." data-es="Construyamos algo<br>genial juntos.">Let's build something<br>great together.</h2>
-      <p data-en="I'm based in Córdoba, Argentina and open to remote work worldwide. Whether it's a project, a job opportunity, or just a conversation — reach out." data-es="Estoy en Córdoba, Argentina y disponible para trabajo remoto en todo el mundo. Ya sea un proyecto, una oportunidad laboral o solo una charla, escribime.">
-        I'm based in Córdoba, Argentina and open to remote work worldwide. Whether it's a project, a job opportunity, or just a conversation — reach out.
-      </p>
-      <div class="contact-links">
-        <a href="mailto:pguido913@gmail.com" class="btn-primary"><i class="fas fa-envelope"></i> <span data-en="Send Email" data-es="Enviar Email">Send Email</span></a>
-        <a href="https://www.linkedin.com/in/guido-actis-perez/" target="_blank" class="btn-ghost"><i class="fab fa-linkedin"></i> LinkedIn</a>
-        <a href="https://github.com/GuidoAP87" target="_blank" class="btn-ghost"><i class="fab fa-github"></i> GitHub</a>
+  <div class="s-inner">
+    <div class="s-header reveal">
+      <span class="s-num">04</span>
+      <h2 class="s-title" data-en="Contact" data-es="Contacto">Contact</h2>
+    </div>
+    <div class="contact-layout">
+      <div class="contact-left reveal">
+        <h2>
+          <span data-en="Let's work" data-es="Trabajemos">Let's work</span><br>
+          <em data-en="together." data-es="juntos.">together.</em>
+        </h2>
+        <p data-en="Based in Córdoba, Argentina. Available for remote work worldwide. Whether it's a short project or a long-term collaboration — I'm ready." data-es="En Córdoba, Argentina. Disponible para trabajo remoto en todo el mundo. Ya sea un proyecto corto o una colaboración a largo plazo — estoy listo.">
+          Based in Córdoba, Argentina. Available for remote work worldwide. Whether it's a short project or a long-term collaboration — I'm ready.
+        </p>
+        <div class="hero-ctas">
+          <a href="mailto:pguido913@gmail.com" class="btn-solid"><i class="fas fa-envelope"></i> pguido913@gmail.com</a>
+        </div>
+      </div>
+      <div class="contact-info reveal">
+        <ul class="contact-links-list">
+          <li>
+            <a href="https://www.linkedin.com/in/guidoactis" target="_blank">
+              LinkedIn <i class="fas fa-arrow-up-right-from-square"></i>
+            </a>
+          </li>
+          <li>
+            <a href="https://github.com/GuidoAP87" target="_blank">
+              GitHub <i class="fas fa-arrow-up-right-from-square"></i>
+            </a>
+          </li>
+          <li>
+            <a href="https://dulcealmacen.github.io" target="_blank">
+              <span data-en="Live Project Demo" data-es="Demo Proyecto Live">Live Project Demo</span>
+              <i class="fas fa-arrow-up-right-from-square"></i>
+            </a>
+          </li>
+        </ul>
+        <div style="margin-top:36px;">
+          <div class="ci-item">
+            <div class="ci-label" data-en="Location" data-es="Ubicación">Location</div>
+            <div class="ci-val">Nueva Córdoba, Argentina</div>
+          </div>
+          <div class="ci-item">
+            <div class="ci-label" data-en="Languages" data-es="Idiomas">Languages</div>
+            <div class="ci-val" data-en="Spanish (Native) · English B2" data-es="Español (Nativo) · Inglés B2">Spanish (Native) · English B2</div>
+          </div>
+          <div class="ci-item">
+            <div class="ci-label" data-en="Availability" data-es="Disponibilidad">Availability</div>
+            <div class="ci-val" data-en="Open to remote work worldwide" data-es="Abierto a trabajo remoto global">Open to remote work worldwide</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- FOOTER -->
 <footer>
-  <a href="#" class="footer-logo">Guido<span>.dev</span></a>
-  <p data-en="© 2026 Guido Perez · Córdoba, Argentina" data-es="© 2026 Guido Perez · Córdoba, Argentina">© 2026 Guido Perez · Córdoba, Argentina</p>
-  <div class="footer-socials">
-    <a href="https://www.linkedin.com/in/guido-actis-perez/" target="_blank"><i class="fab fa-linkedin"></i></a>
+  <a href="#" class="f-logo">G<span>.</span>AP</a>
+  <p>© 2026 Guido Actis Perez</p>
+  <div class="f-socials">
+    <a href="https://www.linkedin.com/in/guidoactis" target="_blank"><i class="fab fa-linkedin"></i></a>
     <a href="https://github.com/GuidoAP87" target="_blank"><i class="fab fa-github"></i></a>
+    <a href="mailto:pguido913@gmail.com"><i class="fas fa-envelope"></i></a>
   </div>
 </footer>
 
 <script>
-// ─── SCROLL PROGRESS ───
-window.addEventListener('scroll', () => {
-  const d = document.documentElement;
-  const pct = (d.scrollTop / (d.scrollHeight - d.clientHeight)) * 100;
-  document.getElementById('progress').style.width = pct + '%';
+// Cursor
+const cur = document.getElementById('cursor');
+const ring = document.getElementById('cursor-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX; my=e.clientY;
+  cur.style.left=mx+'px'; cur.style.top=my+'px';
+});
+function animRing(){
+  rx+=(mx-rx)*0.12; ry+=(my-ry)*0.12;
+  ring.style.left=rx+'px'; ring.style.top=ry+'px';
+  requestAnimationFrame(animRing);
+}
+animRing();
+document.querySelectorAll('a,button').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{
+    cur.style.width='20px'; cur.style.height='20px';
+    ring.style.width='60px'; ring.style.height='60px';
+  });
+  el.addEventListener('mouseleave',()=>{
+    cur.style.width='12px'; cur.style.height='12px';
+    ring.style.width='40px'; ring.style.height='40px';
+  });
 });
 
-// ─── REVEAL ON SCROLL ───
-const reveals = document.querySelectorAll('.reveal');
-const io = new IntersectionObserver((entries) => {
-  entries.forEach((e, i) => {
-    if (e.isIntersecting) {
-      setTimeout(() => e.target.classList.add('visible'), i * 80);
+// Progress
+window.addEventListener('scroll',()=>{
+  const d=document.documentElement;
+  document.getElementById('bar').style.width=(d.scrollTop/(d.scrollHeight-d.clientHeight)*100)+'%';
+});
+
+// Reveal
+const io=new IntersectionObserver(entries=>{
+  entries.forEach((e,i)=>{
+    if(e.isIntersecting){
+      setTimeout(()=>e.target.classList.add('in'),i*90);
       io.unobserve(e.target);
     }
   });
-}, { threshold: 0.1 });
-reveals.forEach(el => io.observe(el));
+},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-// ─── LANGUAGE TOGGLE ───
-let currentLang = 'en';
-
-function setLang(lang) {
-  currentLang = lang;
-  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-  document.querySelector(`.lang-btn:${lang === 'en' ? 'first' : 'last'}-child`).classList.add('active');
-  document.querySelectorAll('[data-en]').forEach(el => {
-    const text = el.getAttribute(`data-${lang}`);
-    if (text) {
-      if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') el.placeholder = text;
-      else el.innerHTML = text;
-    }
+// Lang
+function setLang(l){
+  document.querySelectorAll('.lb').forEach(b=>b.classList.remove('on'));
+  document.querySelector(`.lb:${l==='en'?'first':'last'}-child`).classList.add('on');
+  document.querySelectorAll('[data-en]').forEach(el=>{
+    const t=el.getAttribute('data-'+l);
+    if(t) el.innerHTML=t;
   });
-  document.documentElement.lang = lang;
 }
-
-// ─── NAV SHRINK ON SCROLL ───
-window.addEventListener('scroll', () => {
-  document.querySelector('nav').style.padding =
-    window.scrollY > 60 ? '12px 6%' : '18px 6%';
-});
 </script>
 </body>
 </html>
